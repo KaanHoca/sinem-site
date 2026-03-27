@@ -1,65 +1,102 @@
-import Image from "next/image";
+import Link from "next/link";
+
+const activities = [
+  {
+    href: "/sans-kutusu",
+    icon: "🎁",
+    title: "Şans Kutusu",
+    desc: "Rastgele bir sürpriz aç",
+    color: "from-rose-400 to-pink-500",
+    bg: "bg-rose-50",
+  },
+  {
+    href: "/hafiza-oyunu",
+    icon: "🧠",
+    title: "Hafıza Oyunu",
+    desc: "Kartları eşleştir",
+    color: "from-violet-400 to-purple-500",
+    bg: "bg-violet-50",
+  },
+  {
+    href: "/mesaj-kutusu",
+    icon: "💌",
+    title: "Mesaj Kutusu",
+    desc: "Sana özel notlar",
+    color: "from-amber-400 to-orange-500",
+    bg: "bg-amber-50",
+  },
+  {
+    href: "/kelime-oyunu",
+    icon: "🔤",
+    title: "Kelime Oyunu",
+    desc: "İngilizce pratik yap",
+    color: "from-emerald-400 to-teal-500",
+    bg: "bg-emerald-50",
+  },
+];
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main className="min-h-dvh flex flex-col">
+      {/* Hero */}
+      <section className="relative flex flex-col items-center justify-center px-6 pt-16 pb-12 text-center overflow-hidden">
+        {/* Floating emojis */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+          {["☕", "📚", "💜", "🌸", "✨"].map((emoji, i) => (
+            <span
+              key={i}
+              className="absolute text-2xl sm:text-3xl opacity-40 animate-float"
+              style={{
+                left: `${[10, 80, 30, 65, 50][i]}%`,
+                top: `${[15, 25, 60, 45, 75][i]}%`,
+                animationDelay: `${i * 1.2}s`,
+                animationDuration: `${3 + i * 0.5}s`,
+              }}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+              {emoji}
+            </span>
+          ))}
+        </div>
+
+        <p className="text-sm text-primary-dark font-semibold tracking-wide uppercase mb-2 animate-fade-in-up">
+          Mola zamanı geldi mi?
+        </p>
+        <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-800 mb-4 animate-fade-in-up stagger-1">
+          Hoş geldin{" "}
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-accent">
+            Sinem
+          </span>
+        </h1>
+        <p className="text-base sm:text-lg text-gray-500 max-w-xs animate-fade-in-up stagger-2">
+          Biraz kafa dağıt, gülümse, sonra yine fethedersin o sınavı.
+        </p>
+      </section>
+
+      {/* Menü */}
+      <section className="flex-1 px-5 pb-10">
+        <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
+          {activities.map((item, i) => (
+            <Link
+              key={item.href}
+              href={item.href}
+              className={`${item.bg} rounded-3xl p-5 flex flex-col items-center text-center
+                active:scale-95 transition-transform duration-150
+                shadow-sm hover:shadow-md
+                animate-scale-in`}
+              style={{ animationDelay: `${0.3 + i * 0.1}s`, opacity: 0 }}
             >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+              <span className="text-4xl mb-3">{item.icon}</span>
+              <h3 className="font-bold text-gray-800 text-sm">{item.title}</h3>
+              <p className="text-xs text-gray-500 mt-1">{item.desc}</p>
+            </Link>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="text-center py-6 text-xs text-gray-400">
+        <p className="font-hand text-lg text-primary">seni seviyorum 💜</p>
+      </footer>
+    </main>
   );
 }
