@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useRef, useMemo } from "react";
+import { useState, useCallback, useRef, useMemo, useEffect } from "react";
 import Link from "next/link";
 import { words, type Word } from "@/data/words";
 
@@ -51,11 +51,17 @@ export default function KelimeOyunu() {
     [filteredIndices]
   );
 
-  const [wordIndex, setWordIndex] = useState(() => {
-    const idx = filteredIndices[Math.floor(Math.random() * filteredIndices.length)];
-    return idx ?? 0;
-  });
-  const [scrambled, setScrambled] = useState(() => scrambleWord(words[wordIndex].english));
+  const [wordIndex, setWordIndex] = useState(0);
+  const [scrambled, setScrambled] = useState("");
+  const [ready, setReady] = useState(false);
+
+  // İlk kelimeyi client tarafında rastgele seç (SSR'da sabit kalmasın)
+  useEffect(() => {
+    const idx = filteredIndices[Math.floor(Math.random() * filteredIndices.length)] ?? 0;
+    setWordIndex(idx);
+    setScrambled(scrambleWord(words[idx].english));
+    setReady(true);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const currentWord = words[wordIndex];
   const colors = levelColors[currentWord.level];

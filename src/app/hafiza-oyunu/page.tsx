@@ -32,8 +32,18 @@ function createCards(): Card[] {
   }));
 }
 
+function emptyCards(): Card[] {
+  return Array.from({ length: 16 }, (_, i) => ({ id: i, emoji: "", flipped: false, matched: false }));
+}
+
 export default function HafizaOyunu() {
-  const [cards, setCards] = useState<Card[]>(createCards);
+  const [cards, setCards] = useState<Card[]>(emptyCards);
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    setCards(createCards());
+    setReady(true);
+  }, []);
   const [selected, setSelected] = useState<number[]>([]);
   const [moves, setMoves] = useState(0);
   const [matches, setMatches] = useState(0);
