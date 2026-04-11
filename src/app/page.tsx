@@ -38,8 +38,36 @@ const activities = [
 export default function Home() {
   return (
     <main className="min-h-dvh flex flex-col">
+      {/* Yeni mektup bildirimi */}
+      <div className="px-5 pt-5">
+        <Link
+          href="/mektup"
+          className="group block max-w-md mx-auto bg-gradient-to-r from-rose-100 via-pink-100 to-violet-100
+            rounded-2xl p-4 shadow-md animate-pulse-glow active:scale-[0.98] transition-transform
+            border border-white/60 relative overflow-hidden"
+        >
+          <div className="flex items-center gap-3">
+            <div className="relative shrink-0">
+              <span className="text-3xl inline-block animate-heartbeat">💌</span>
+              <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white" />
+            </div>
+            <div className="flex-1 min-w-0">
+              <p className="text-xs text-primary-dark font-semibold uppercase tracking-wide">
+                Yeni bildirim
+              </p>
+              <p className="text-sm font-bold text-gray-800 truncate">
+                Yeni bir mektubunuz var
+              </p>
+            </div>
+            <span className="text-primary-dark text-lg shrink-0 group-active:translate-x-1 transition-transform">
+              →
+            </span>
+          </div>
+        </Link>
+      </div>
+
       {/* Hero */}
-      <section className="relative flex flex-col items-center justify-center px-6 pt-16 pb-12 text-center overflow-hidden">
+      <section className="relative flex flex-col items-center justify-center px-6 pt-10 pb-12 text-center overflow-hidden">
         {/* Floating emojis */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
           {["☕", "📚", "💜", "🌸", "✨"].map((emoji, i) => (
